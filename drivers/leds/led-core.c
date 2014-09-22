@@ -124,3 +124,21 @@ void led_set_brightness(struct led_classdev *led_cdev,
 	__led_set_brightness(led_cdev, brightness);
 }
 EXPORT_SYMBOL(led_set_brightness);
+
+/* Caller must ensure led_cdev->led_access held */
+void led_sysfs_disable(struct led_classdev *led_cdev)
+{
+	lockdep_assert_held(&led_cdev->led_access);
+
+	led_cdev->flags |= LED_SYSFS_DISABLE;
+}
+EXPORT_SYMBOL_GPL(led_sysfs_disable);
+
+/* Caller must ensure led_cdev->led_access held */
+void led_sysfs_enable(struct led_classdev *led_cdev)
+{
+	lockdep_assert_held(&led_cdev->led_access);
+
+	led_cdev->flags &= ~LED_SYSFS_DISABLE;
+}
+EXPORT_SYMBOL_GPL(led_sysfs_enable);
