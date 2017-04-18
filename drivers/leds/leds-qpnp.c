@@ -3111,8 +3111,8 @@ static DEVICE_ATTR(ramp_step_ms, 0664, NULL, ramp_step_ms_store);
 static DEVICE_ATTR(lut_flags, 0664, NULL, lut_flags_store);
 static DEVICE_ATTR(duty_pcts, 0664, NULL, duty_pcts_store);
 static DEVICE_ATTR(blink, 0664, NULL, blink_store);
-static DEVICE_ATTR(rgb_blink, 0664, NULL, rgb_blink_store);
-static DEVICE_ATTR(enable, 0644, shutdown_enable_show, shutdown_enable_store);
+static DEVICE_ATTR(on_off_ms, 0660, rgb_on_off_ms_show, rgb_on_off_ms_store);
+static DEVICE_ATTR(rgb_start, 0220, NULL, rgb_start_store);
 static DEVICE_ATTR(led_fade, S_IWUSR | S_IRUGO, show_led_fade, store_led_fade);
 static DEVICE_ATTR(led_intensity, S_IWUSR | S_IRUGO, show_led_intensity, store_led_intensity);
 static DEVICE_ATTR(led_speed, S_IWUSR | S_IRUGO, show_led_speed, store_led_speed);
@@ -3138,6 +3138,8 @@ static struct attribute *lpg_attrs[] = {
 	&dev_attr_ramp_step_ms.attr,
 	&dev_attr_lut_flags.attr,
 	&dev_attr_duty_pcts.attr,
+	&dev_attr_on_off_ms.attr,
+	&dev_attr_rgb_start.attr,
 	&dev_attr_led_fade.attr,
 	&dev_attr_led_intensity.attr,
 	&dev_attr_led_speed.attr,	NULL
